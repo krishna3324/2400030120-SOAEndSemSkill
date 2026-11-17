@@ -1,0 +1,43 @@
+services:
+  gateway:
+    build: .
+    command: ["node", "src/gateway.js"]
+    environment:
+      DRIVERS_SERVICE_URI: api://drivers-server:8080
+      PORT: "3000"
+      DNS_REFRESH_MS: "5000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - driver-server-1
+      - driver-server-2
+      - driver-server-3
+    networks:
+      - drivers
+
+  driver-server-1:
+    build: .
+    command: ["node", "servers/server-1.js"]
+    networks:
+      drivers:
+        aliases:
+          - drivers-server
+
+  driver-server-2:
+    build: .
+    command: ["node", "servers/server-2.js"]
+    networks:
+      drivers:
+        aliases:
+          - drivers-server
+
+  driver-server-3:
+    build: .
+    command: ["node", "servers/server-3.js"]
+    networks:
+      drivers:
+        aliases:
+          - drivers-server
+
+networks:
+  drivers:

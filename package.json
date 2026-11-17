@@ -1,0 +1,13 @@
+{
+  "name": "drivers-round-robin-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A DNS-discovered round-robin API gateway for the driver service",
+  "scripts": {
+    "start": "node src/gateway.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
